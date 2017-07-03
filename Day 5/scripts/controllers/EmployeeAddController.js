@@ -8,7 +8,9 @@ hrApp.controller('EmployeeAddController', ['$scope', '$http', '$location', 'Comm
         //TODO #HR1
 
         $scope.departments = EmployeeService.getDepartmentsList();
-        $scope.managers = EmployeeService.getManagersList();
+        EmployeeService.getManagersList().then(function (result) {
+            $scope.managers = result;
+        });
         $scope.jobs = EmployeeService.getJobsList();
 
         // $http.get(CommonResourcesFactory.findAllDepartmentsUrl)

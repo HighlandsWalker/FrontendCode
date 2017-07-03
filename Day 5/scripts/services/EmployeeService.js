@@ -32,37 +32,39 @@ hrApp.service('EmployeeService', ['$http', 'CommonResourcesFactory', function ($
                     });
             },
             getManagersList: function () {
-                return $http.get(CommonResourcesFactory.findAllDepartmentsUrl)
+                return $http.get(CommonResourcesFactory.findAllEmployeesUrl)
                     .success(function (data, status, headers, config) {
-                        var returnData;
-                        var managersIds;
-                        var employeeId;
-                        for(var each in data){
-                            if(data[each].managerId != null){
-                                var check = 0;
-                                if(managersIds == null){
-                                    check = 0;
-                                }else {
-                                    for(var current = 0; current < managersIds.length; current++){
-                                        if(managersIds[current] == data[each].managerId.employeeId){
-                                            check = 1;
-                                            break;
-                                        }
-                                    }
-                                }
-                                if(check == 0){
-                                    employeeId = data[each].managerId.employeeId;
-                                    returnData.push(employeeId);
-                                }
-                            }
-                        }
-                        for(var current in managersIds){
-                            for(var each in data){
-                                if(managersIds[current] == each.eployeeId){
-                                    return data.push(data[each]);
-                                }
-                            }
-                        }
+                        // var returnData = [];
+                        // var managersIds = [];
+                        // var employeeId;
+                        // for(var each in data){
+                        //     if(data[each].managerId != null){
+                        //         var found = false;
+                        //         if(managersIds.length == 0){
+                        //             found = false;
+                        //         } else {
+                        //             for(var current = 0; current < managersIds.length; current++){
+                        //                 if(managersIds[current] == data[each].managerId.employeeId){
+                        //                     found = true;
+                        //                     break;
+                        //                 }
+                        //             }
+                        //         }
+                        //         if(!found){
+                        //             managersIds.push(angular.copy(data[each].managerId.employeeId));
+                        //         }
+                        //     }
+                        // }
+                        // for(var current in managersIds){
+                        //     for(var each in data){
+                        //         if(managersIds[current] == data[each].eployeeId){
+                        //             returnData.push(data[each]);
+                        //         }
+                        //     }
+                        // }
+                        // return returnData;
+
+
                     })
                     .error(function (data, status, headers, config) {
                         alert("Error: getManagersList" + status);
@@ -70,7 +72,7 @@ hrApp.service('EmployeeService', ['$http', 'CommonResourcesFactory', function ($
                     });
             },
             getJobsList: function () {
-                return $http.get(CommonResourcesFactory.findAllDepartmentsUrl)
+                return $http.get(CommonResourcesFactory.findAllJobsUrl)
                     .success(function (data, status, headers, config) {
                         return data;
                     })
