@@ -66,7 +66,7 @@
                     <div class="form-group"  ng-class="{ 'has-error': employeeAddForm.jobTitle.$invalid }">
                         <!--TODO#HR2-->
                         <label for="jobTitle">Job Title :</label>
-                        <select id="jobTitle" ng-model="job.jobId" name="job" class="form-control" required
+                        <select id="jobTitle" ng-model="employee.jobId" name="job" class="form-control" required
                                 ng-options="job.jobTitle for job in jobs track by job.jobId">
                         </select>
                     </div>
@@ -89,9 +89,9 @@
                         <label for="commissionPct">Commission:</label>
                         <input type="text" id="commissionPct" name="commissionPct" class="form-control" ng-model="employee.commissionPct"
                                placeholder="Commission" ng-pattern="commissionPattern" required>
-                         <span class="help-block" ng-show="employeeAddForm.commissionPct.$error.required
+                        <span class="help-block" ng-show="employeeAddForm.commissionPct.$error.required
                              && employeeAddForm.commissionPct.$dirty">{{requiredErrorMessage}}</span>
-                         <span class="help-block" ng-show="employeeAddForm.commissionPct.$error.pattern
+                        <span class="help-block" ng-show="employeeAddForm.commissionPct.$error.pattern
                              && employeeAddForm.commissionPct.$dirty">{{patternCommisionNotRespectedMessage}}</span>
                     </div>
                 </div>
@@ -99,11 +99,11 @@
             <div class="row">
                 <div class="col-lg-6">
                     <!--TODO#HR3-->
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': employeeAddForm.department.$invalid }">
                         <!--TODO#HR2-->
                         <label for="department">Department:</label>
-                        <select id="department" ng-model="department.departmentId" name="department" class="form-control" required
-                                ng-options="department.departmentName for department in departments track by department.departmentId">
+                        <select id="department" ng-model="employee.departmentId" name="department" class="form-control" required
+                                ng-options="department as department.departmentName for department in departments track by department.departmentId">
                         </select>
                     </div>
                 </div>

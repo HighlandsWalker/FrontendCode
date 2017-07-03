@@ -78,8 +78,8 @@ hrApp.controller('EmployeeEditController', ['$scope', '$http', '$routeParams', '
          */
         $scope.create = function (addEmployee) {
             $http({url: CommonResourcesFactory.editEmployeeUrl, method: 'PUT', data: addEmployee})
-                .success(function (data) {
-                    $scope.employee = data;
+                .success(function (res) {
+                    $scope.employee = res.data;
                     $location.url('/employeeView/' + $scope.employee.employeeId);
                 });
         };

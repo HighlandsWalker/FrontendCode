@@ -41,11 +41,6 @@ hrApp.controller('EmployeeDeleteController', ['$scope', '$http', '$routeParams',
                 console.log("Error at employees/findOne: " + err);
             });
 
-        $http({url: CommonResourcesFactory.findOneEmployeeUrl + $routeParams.employeeId, method: 'GET'})
-            .success(function(res){
-                $scope.employee = res.data;
-            });
-
         /**
          * Reset form
          */
@@ -58,10 +53,12 @@ hrApp.controller('EmployeeDeleteController', ['$scope', '$http', '$routeParams',
          * @param addEmployee - employee to be persisted
          */
 
-        $scope.acceptDelete = function (employeeId) {
-            $http({url: CommonResourcesFactory.deleteEmployeeUrl + employeeId, method: 'DELETE'})
-                .success(function (data) {
-                    console.log(data);
+        $scope.acceptDelete = function (employee) {
+            $http({url: CommonResourcesFactory.deleteEmployeeUrl, method: 'DELETE', data: employee, headers: {
+                "Content-Type": "application/json"
+            }})
+                .success(function (res) {
+                    console.log(res);
                     $location.url('/employeeList');
                 });
         };
