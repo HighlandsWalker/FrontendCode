@@ -1,10 +1,11 @@
-hrApp.controller('EmployeeEditController', ['$scope', '$http', '$routeParams', '$location', 'CommonResourcesFactory','EmployeeService',
-    function ($scope, $http, $routeParams, $location, CommonResourcesFactory,EmployeeService) {
+hrApp.controller('EmployeeDeleteController', ['$scope', '$http', '$routeParams', '$location', 'CommonResourcesFactory','EmployeeService',
+    function ($scope, $http, $routeParams, $location, CommonResourcesFactory, EmployeeService) {
         $scope.requiredErrorMessage = "Please fill out this form!";
         $scope.patternDateNotRespectedMessage = "The date format should be yyyy-mm-dd";
         $scope.patternCommisionNotRespectedMessage = "Commission should be in the format 0.XX";
 
         //TODO #HR5
+
         $scope.employee = {};
         $scope.departments = [];
         $scope.managers = [];
@@ -56,11 +57,12 @@ hrApp.controller('EmployeeEditController', ['$scope', '$http', '$routeParams', '
          * Persist an employee
          * @param addEmployee - employee to be persisted
          */
-        $scope.create = function (addEmployee) {
-            $http({url: CommonResourcesFactory.editEmployeeUrl, method: 'PUT', data: addEmployee})
+
+        $scope.delete = function (employeeId) {
+            $http({url: CommonResourcesFactory.deleteEmployeeUrl + employeeId, method: 'DELETE', data: employeeId})
                 .success(function (data) {
-                    $scope.employee = data;
-                    $location.url('/employeeView/' + $scope.employee.employeeId);
+                    console.log(data);
+                    $location.url('/employeeList');
                 });
         };
 
