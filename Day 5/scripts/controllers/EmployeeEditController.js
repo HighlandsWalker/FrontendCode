@@ -5,32 +5,52 @@ hrApp.controller('EmployeeEditController', ['$scope', '$http', '$routeParams', '
         $scope.patternCommisionNotRespectedMessage = "Commission should be in the format 0.XX";
 
         //TODO #HR5
-        $scope.employee = {};
+        $scope.employee;
         $scope.departments = [];
         $scope.managers = [];
         $scope.jobs = [];
 
-        $http({url: CommonResourcesFactory.findAllDepartmentsUrl, method: 'GET'})
-            .success(function(res){
+        // $http({url: CommonResourcesFactory.findAllDepartmentsUrl, method: 'GET'})
+        //     .success(function(res){
+        //         $scope.departments = res.data;
+        //     });
+        // $http({url: CommonResourcesFactory.findAllJobsUrl, method: 'GET'})
+        //     .success(function(res){
+        //         $scope.jobs = res.data;
+        //     });
+        // $http({url: CommonResourcesFactory.findAllEmployeesUrl, method: 'GET'})
+        //     .success(function(res){
+        //         var data = res.data;
+        //         var managersIds = {};
+        //         var returnData = [];
+        //         for(var each in data) {
+        //             var manager = data[each].managerId;
+        //             if(manager != null && managersIds[manager.employeeId] == undefined) {
+        //                 managersIds[manager.employeeId] = true;
+        //                 returnData.push(angular.copy(manager));
+        //             }
+        //         }
+        //         $scope.managers = returnData;
+        //     });
+
+        EmployeeService.getDepartmentsList()
+            .then(function (res) {
                 $scope.departments = res.data;
+            }, function (err) {
+                console.log("getDepartmentsList: " + err);
             });
-        $http({url: CommonResourcesFactory.findAllJobsUrl, method: 'GET'})
-            .success(function(res){
+        EmployeeService.getJobsList()
+            .then(function (res) {
                 $scope.jobs = res.data;
+            }, function (err) {
+                console.log("getManagersList: " + err);
             });
-        $http({url: CommonResourcesFactory.findAllEmployeesUrl, method: 'GET'})
-            .success(function(res){
-                var data = res.data;
-                var managersIds = {};
-                var returnData = [];
-                for(var each in data) {
-                    var manager = data[each].managerId;
-                    if(manager != null && managersIds[manager.employeeId] == undefined) {
-                        managersIds[manager.employeeId] = true;
-                        returnData.push(angular.copy(manager));
-                    }
-                }
-                $scope.managers = returnData;
+
+        EmployeeService.getEmployeesList()
+            .then(function (res) {
+                $scope.managers = EmployeeService.getManagersFromEmployeeList(res.data);
+            }, function (err) {
+                console.log("getManagersList: " + err);
             });
 
         EmployeeService.findById($routeParams.employeeId)
@@ -40,10 +60,10 @@ hrApp.controller('EmployeeEditController', ['$scope', '$http', '$routeParams', '
                 console.log("Error at employees/findOne: " + err);
             });
 
-        $http({url: CommonResourcesFactory.findOneEmployeeUrl + $routeParams.employeeId, method: 'GET'})
-            .success(function(res){
-                $scope.employee = res.data;
-            });
+        // $http({url: CommonResourcesFactory.findOneEmployeeUrl + $routeParams.employeeId, method: 'GET'})
+        //     .success(function(res){
+        //         $scope.employee = res.data;
+        //     });
 
         /**
          * Reset form

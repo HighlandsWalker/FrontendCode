@@ -1,11 +1,15 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h2 class="panel-title">Edit employee <b>{{employee.firstName}} {{employee.lastName}}</b></h2>
+        <h2 class="panel-title">Delete employee <b>{{employee.firstName}} {{employee.lastName}}</b></h2>
     </div>
     <div class="panel-body">
         <ng-form name="employeeDeleteForm">
             <!--TODO#HR7-->
-            <p align="centre">Esti sigur???</p>
+            <div>
+                <p align="centre">Esti sigur???</p>
+                <a class="btn btn-primary btn-lg" role="button" ng-click="acceptDelete(employee.employeeId)">DAAA!</a>
+                <a class="btn btn-primary btn-lg" role="button" ng-click="denyDelete()">NUUU!</a>
+            </div>
         </ng-form>
     </div>
 </div>

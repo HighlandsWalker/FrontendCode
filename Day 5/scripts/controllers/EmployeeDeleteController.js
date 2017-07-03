@@ -58,12 +58,15 @@ hrApp.controller('EmployeeDeleteController', ['$scope', '$http', '$routeParams',
          * @param addEmployee - employee to be persisted
          */
 
-        $scope.delete = function (employeeId) {
-            $http({url: CommonResourcesFactory.deleteEmployeeUrl + employeeId, method: 'DELETE', data: employeeId})
+        $scope.acceptDelete = function (employeeId) {
+            $http({url: CommonResourcesFactory.deleteEmployeeUrl + employeeId, method: 'DELETE'})
                 .success(function (data) {
                     console.log(data);
                     $location.url('/employeeList');
                 });
+        };
+        $scope.denyDelete = function (employeeId) {
+            $location.url('/employeeList');
         };
 
         $scope.datePattern = /^\d{4}-\d{2}-\d{2}$/;
