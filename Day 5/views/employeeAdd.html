@@ -7,48 +7,45 @@
             <div class="row">
                 <div class="col-lg-6">
                     <!--TODO#HR3-->
-                    <label for="firstName">First Name:</label>
-                    <!--<span id="firstName" class="form-control">{{employee.firstName}}</span>-->
-                    <input id="firstName" class="form-control" name="employeeFirstName" ng-model="employee.firstName"
-                           placeholder="First Name">
-                    <div class="form-group" >
+                    <div class="form-group" ng-class="{ 'has-error': employeeAddForm.firstName.$invalid }">
                         <!--TODO#HR2-->
-
+                        <label for="firstName">First Name:</label>
+                        <!--<span id="firstName" class="form-control">{{employee.firstName}}</span>-->
+                        <input id="firstName" class="form-control" name="employeeFirstName" ng-model="employee.firstName"
+                               placeholder="First Name" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <!--TODO#HR3-->
-                    <label for="lastName">Last Name:</label>
-                    <!--<span id="lastName" class="form-control">{{employee.lastName}}</span>-->
-                    <input id="lastName" class="form-control" name="employeeLastName" ng-model="employee.lastName"
-                           placeholder="Last Name">
-                    <div class="form-group">
+                    <div class="form-group"  ng-class="{ 'has-error': employeeAddForm.lastName.$invalid }">
                         <!--TODO#HR2-->
-
+                        <label for="lastName">Last Name:</label>
+                        <!--<span id="lastName" class="form-control">{{employee.lastName}}</span>-->
+                        <input id="lastName" class="form-control" name="employeeLastName" ng-model="employee.lastName"
+                               placeholder="Last Name" required>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
                     <!--TODO#HR3-->
-                    <label for="email">E-mail :</label>
-                    <!--<span id="email" class="form-control">{{employee.email}}</span>-->
-                    <input id="email" class="form-control" name="employeeEmail" ng-model="employee.email"
-                           placeholder="E-mail">
-                    <div class="form-group">
+                    <div class="form-group"  ng-class="{ 'has-error': employeeAddForm.email.$invalid }">
                         <!--TODO#HR2-->
+                        <label for="email">E-mail:</label>
+                        <!--<span id="email" class="form-control">{{employee.email}}</span>-->
+                        <input id="email" class="form-control" name="employeeEmail" ng-model="employee.email"
+                               placeholder="E-mail" required>
 
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <!--TODO#HR3-->
-                    <label for="phoneNumber">Phone Number :</label>
-                    <!--<span id="phoneNumber" class="form-control">{{employee.phoneNumber}}</span>-->
-                    <input id="phoneNumber" class="form-control" name="employeePhoneNumber" ng-model="employee.phoneNumber"
-                           placeholder="Phone Number">
-                    <div class="form-group">
+                    <div class="form-group"  ng-class="{ 'has-error': employeeAddForm.phoneNumber.$invalid }">
                         <!--TODO#HR2-->
-
+                        <label for="phoneNumber">Phone Number:</label>
+                        <!--<span id="phoneNumber" class="form-control">{{employee.phoneNumber}}</span>-->
+                        <input id="phoneNumber" class="form-control" name="employeePhoneNumber" ng-model="employee.phoneNumber"
+                               placeholder="Phone Number" required>
                     </div>
                 </div>
             </div>
@@ -66,25 +63,24 @@
                 </div>
                 <div class="col-lg-6">
                     <!--TODO#HR3-->
-                    <label for="jobTitle">Job Title :</label>
-                    <!--<span id="phoneNumber" class="form-control">{{employee.phoneNumber}}</span>-->
-                    <input id="jobTitle" class="form-control" name="employeeJobTitle" ng-model="employee.jobld"
-                           placeholder="Job Title">
-                    <div class="form-group">
+                    <div class="form-group"  ng-class="{ 'has-error': employeeAddForm.jobTitle.$invalid }">
                         <!--TODO#HR2-->
+                        <label for="jobTitle">Job Title :</label>
+                        <select id="jobTitle" ng-model="job.jobId" name="job" class="form-control" required
+                                ng-options="job.jobTitle for job in jobs track by job.jobId">
+                        </select>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
                     <!--TODO#HR3-->
-                    <label for="salary">Salary :</label>
-                    <!--<span id="phoneNumber" class="form-control">{{employee.phoneNumber}}</span>-->
-                    <input id="salary" class="form-control" name="employeeSalary" ng-model="employee.salary"
-                           placeholder="Salary">
-                    <div class="form-group">
+                    <div class="form-group"  ng-class="{ 'has-error': employeeAddForm.salary.$invalid }">
                         <!--TODO#HR2-->
-
+                        <label for="salary">Salary:</label>
+                        <!--<span id="phoneNumber" class="form-control">{{employee.phoneNumber}}</span>-->
+                        <input id="salary" class="form-control" name="employeeSalary" ng-model="employee.salary"
+                               placeholder="Salary" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -104,11 +100,11 @@
                 <div class="col-lg-6">
                     <!--TODO#HR3-->
                     <div class="form-group">
-                        <label for="department">Department:</label>
-                        <select id="department" ng-model="employee.departmentId" name="department" class="form-control" required
-                                ng-options="manager.firstName+' '+ manager.lastName for manager in managers track by manager.employeeId">
-                        </select>
                         <!--TODO#HR2-->
+                        <label for="department">Department:</label>
+                        <select id="department" ng-model="department.departmentId" name="department" class="form-control" required
+                                ng-options="department.departmentName for department in departments track by department.departmentId">
+                        </select>
                     </div>
                 </div>
                 <div class="col-lg-6">

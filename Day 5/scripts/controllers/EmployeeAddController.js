@@ -6,39 +6,29 @@ hrApp.controller('EmployeeAddController', ['$scope', '$http', '$location', 'Comm
         $scope.patternCommisionNotRespectedMessage = "Commission should be in the format 0.XX";
 
         //TODO #HR1
+        $scope.departments = [];
+        $scope.managers = [];
+        $scope.jobs = [];
 
-        $scope.departments = EmployeeService.getDepartmentsList();
-        EmployeeService.getManagersList().then(function (result) {
-            $scope.managers = result;
-        });
-        $scope.jobs = EmployeeService.getJobsList();
+        EmployeeService.getDepartmentsList()
+            .then(function (res) {
+                $scope.departments = res.data;
+            }, function (err) {
+                console.log("getDepartmentsList: " + err);
+            });
+        EmployeeService.getJobsList()
+            .then(function (res) {
+                $scope.jobs = res.data;
+            }, function (err) {
+                console.log("getManagersList: " + err);
+            });
 
-        // $http.get(CommonResourcesFactory.findAllDepartmentsUrl)
-        //     .success(function(data, status, headers, config) {
-        //         $scope.departments = data;
-        //     })
-        //     .error (function(data, status, headers, config){
-        //         alert("Error: " + status);
-        //     });
-        //
-        // $http.get(CommonResourcesFactory.findAllEmployeesUrl)
-        //     .success(function(data, status, headers, config) {
-        //         $scope.managers = data;
-        //
-        //     })
-        //     .error (function(data, status, headers, config){
-        //         alert("Error: " + status);
-        //     });
-        //
-        // $http.get(CommonResourcesFactory.findAllJobsUrl)
-        //     .success(function(data, status, headers, config) {
-        //         $scope.jobs = data;
-        //     })
-        //     .error (function(data, status, headers, config){
-        //         alert("Error: " + status);
-        //     });
-
-
+        EmployeeService.getEmployeesList()
+            .then(function (res) {
+                $scope.managers = EmployeeService.getManagersFromEmployeeList(res.data);
+            }, function (err) {
+                console.log("getManagersList: " + err);
+            });
 
         /**
          * Reset form
